@@ -1,0 +1,52 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.0/containers/docker-existing-dockerfile
+{
+	"name": "HSO Dockerfile",
+
+	// Sets the run context to one level up instead of the .devcontainer folder.
+	"context": "..",
+
+	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+	"dockerFile": "../Dockerfile",
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Uncomment the next line to run commands after the container is created - for example installing curl.
+	// "postCreateCommand": "apt-get update && apt-get install -y curl",
+
+	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
+	"runArgs": [
+		"--privileged", // Run privileged support for interfacing with /dev
+		"--network=host", // Run on host's network
+		// "--gpus=all", // Run nvidia drivers
+		"--env", "DISPLAY=${env:DISPLAY}" // Pass the host display
+	],
+
+	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
+	"mounts": [
+		"source=/dev,target=/dev,type=bind", // Share all devices with host
+		"source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind" // Mount the X11 socket to use gui
+	],
+
+	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "user",
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cpptools",
+				"twxs.cmake",
+				"ms-vscode.cmake-tools",
+				"ms-azuretools.vscode-docker",
+				"cschlosser.doxdocgen",
+				"mhutchie.git-graph",
+				"eamodio.gitlens",
+				"ms-python.python",
+				"redhat.vscode-yaml",
+				"ms-vscode.cpptools-extension-pack"
+			]
+		}
+	}
+}
