@@ -2,3 +2,4 @@ thirdparty*
 build*
 bin*
 lib*
+datasets*
